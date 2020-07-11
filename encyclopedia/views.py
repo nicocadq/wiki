@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from . import util
 
@@ -9,6 +9,13 @@ def index(request):
     })
 
 def entry(request, title):
-    return render(request, "encyclopedia/entry.html", {
-        "title": title,
-    })
+    f = util.get_entry(title)
+    if f is not None:
+        return render(request, "encyclopedia/entry.html", {
+            "title": title.capitalize(),
+            "content": f,
+        })
+    return redirect("/not_found")
+
+def not_found(request):
+    return render(request, "encyclopedia/not_found.html")
