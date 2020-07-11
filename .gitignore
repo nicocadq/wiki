@@ -1,0 +1,7 @@
+**/__pycache__
+*.pyc
+*.sqlite3
+*.db
+*.swp
+*.sql
+*/settings/local.py
