@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 from . import util
 
@@ -15,7 +15,7 @@ def entry(request, title):
             "title": title.capitalize(),
             "content": f,
         })
-    return redirect("/not_found/")
+    return redirect(reverse(not_found))
 
 def not_found(request):
     return render(request, "encyclopedia/not_found.html")
