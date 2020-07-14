@@ -17,5 +17,12 @@ def entry(request, title):
         })
     return redirect(reverse(not_found))
 
+def search(request, title):
+    for entry in util.list_entries():
+        if entry.lower() == title:
+            return redirect("entry", title = title)
+    return redirect(reverse(not_found))
+
+
 def not_found(request):
     return render(request, "encyclopedia/not_found.html")
