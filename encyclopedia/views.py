@@ -18,9 +18,21 @@ def entry(request, title):
     return redirect(reverse(not_found))
 
 def search(request, title):
-    for entry in util.list_entries():
+    entries = util.list_entries()
+    matchedEntries = []
+
+    for entry in entries:
         if entry.lower() == title:
             return redirect("entry", title = title)
+        if title in entry.lower():
+            matchedEntries.append(entry)
+
+    if len(matchedEntries) >= 1:
+        return render(request, "encyclopedia/search.html", {
+            "title": title,
+            "entries" : matchedEntries,
+        })
+
     return redirect(reverse(not_found))
 
 
